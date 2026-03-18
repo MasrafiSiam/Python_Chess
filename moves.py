@@ -82,3 +82,36 @@ def get_knight_moves(board, row, col):
                     moves.append((row, col, r, c))
 
     return moves
+
+
+def get_bishop_moves(board, row, col):
+    moves = []
+    piece = board.board[row][col]
+
+    directions = [
+        (-1, -1), (-1, 1),
+        (1, -1), (1, 1)
+    ]
+
+    for dr, dc in directions:
+        r, c = row + dr, col + dc
+
+        while 0 <= r <= 7 and 0 <= c <= 7:
+            target = board.board[r][c]
+
+            if target == ".":
+                moves.append((row, col, r, c))
+            else:
+                # If enemy piece → capture
+                if piece.isupper() and target.islower():
+                    moves.append((row, col, r, c))
+                elif piece.islower() and target.isupper():
+                    moves.append((row, col, r, c))
+
+                # Stop after hitting any piece
+                break
+
+            r += dr
+            c += dc
+
+    return moves

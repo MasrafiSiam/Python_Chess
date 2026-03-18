@@ -1,18 +1,13 @@
 from board import Board
-from moves import get_pawn_moves, get_knight_moves
+from moves import get_bishop_moves
 
 def main():
     board = Board()
     board.print_board()
 
-    print("\nWhite pawn e2 moves:")
-    pawn_moves = get_pawn_moves(board, 6, 4)
-    for move in pawn_moves:
-        print(move)
-
-    print("\nWhite knight g1 moves:")
-    knight_moves = get_knight_moves(board, 7, 6)
-    for move in knight_moves:
+    print("\nTesting bishop at c1 (should be blocked):")
+    moves = get_bishop_moves(board, 7, 2)
+    for move in moves:
         print(move)
 
 if __name__ == "__main__":
