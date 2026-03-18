@@ -1,4 +1,4 @@
-# main.py
+
 from board import Board
 
 def main():
