@@ -10,7 +10,7 @@ class Board:
             ["P", "P", "P", "P", "P", "P", "P", "P"],
             ["R", "N", "B", "Q", "K", "B", "N", "R"],
         ]
-        self.turn = "white"  # "white" or "black"
+        self.turn = "white"
 
     def print_board(self):
         print("  a b c d e f g h")
@@ -22,4 +22,16 @@ class Board:
         print(f"Turn: {self.turn}")
 
     def switch_turn(self):
-        self.turn == "black" if self.turn == "white" else "white"
+        self.turn = "black" if self.turn == "white" else "white"
+
+    def make_move(self, move):
+        from_row, from_col, to_row, to_col = move
+
+        piece = self.board[from_row][from_col]
+
+        # Move piece
+        self.board[to_row][to_col] = piece
+        self.board[from_row][from_col] = "."
+
+        # Switch turn
+        self.switch_turn()
