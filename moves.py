@@ -155,3 +155,27 @@ def get_queen_moves(board, row, col):
     moves.extend(get_rook_moves(board, row, col))
 
     return moves
+
+def get_king_moves(board, row, col):
+    moves = []
+    piece = board.board[row][col]
+
+    directions = [
+        (-1, 0), (1, 0), (0, -1), (0, 1),
+        (-1, -1), (-1, 1), (1, -1), (1, 1)
+    ]
+
+    for dr, dc in directions:
+        r, c = row + dr, col + dc
+
+        if 0 <= r <= 7 and 0 <= c <= 7:
+            target = board.board[r][c]
+
+            if piece.isupper():
+                if target == "." or target.islower():
+                    moves.append((row, col, r, c))
+            else:
+                if target == "." or target.isupper():
+                    moves.append((row, col, r, c))
+
+    return moves
