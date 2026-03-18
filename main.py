@@ -1,14 +1,17 @@
 from board import Board
-from moves import get_king_moves
+from moves import get_all_moves
 
 def main():
     board = Board()
     board.print_board()
 
-    print("\nTesting king at e1 (should be blocked):")
-    moves = get_king_moves(board, 7, 4)
+    print("\nAll possible moves for white:")
+    moves = get_all_moves(board)
+
     for move in moves:
         print(move)
+
+    print(f"\nTotal moves: {len(moves)}")
 
 if __name__ == "__main__":
     main()
