@@ -1,4 +1,5 @@
-# moves.py
+import copy
+from rules import is_in_check
 
 
 def get_pawn_moves(board, row, col):
@@ -223,3 +224,21 @@ def get_all_moves(board):
                     all_moves.extend(get_king_moves(board, row, col))
 
     return all_moves
+
+def get_all_legal_moves(board):
+    legal_moves = []
+
+    all_moves = get_all_moves(board)
+
+    for move in all_moves:
+        # Create a copy of board
+        new_board = copy.deepcopy(board)
+
+        # Make the move
+        new_board.make_move(move)
+
+        # If king is NOT in check → valid move
+        if not is_in_check(new_board, board.turn):
+            legal_moves.append(move)
+
+    return legal_moves
