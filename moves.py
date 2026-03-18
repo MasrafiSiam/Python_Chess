@@ -146,3 +146,12 @@ def get_rook_moves(board, row, col):
             c += dc
 
     return moves
+
+def get_queen_moves(board, row, col):
+    moves = []
+
+    # Queen = bishop + rook
+    moves.extend(get_bishop_moves(board, row, col))
+    moves.extend(get_rook_moves(board, row, col))
+
+    return moves
