@@ -115,3 +115,34 @@ def get_bishop_moves(board, row, col):
             c += dc
 
     return moves
+
+def get_rook_moves(board, row, col):
+    moves = []
+    piece = board.board[row][col]
+
+    directions = [
+        (-1, 0), (1, 0),
+        (0, -1), (0, 1)
+    ]
+
+    for dr, dc in directions:
+        r, c = row + dr, col + dc
+
+        while 0 <= r <= 7 and 0 <= c <= 7:
+            target = board.board[r][c]
+
+            if target == ".":
+                moves.append((row, col, r, c))
+            else:
+                # Capture enemy piece
+                if piece.isupper() and target.islower():
+                    moves.append((row, col, r, c))
+                elif piece.islower() and target.isupper():
+                    moves.append((row, col, r, c))
+
+                break  # stop after hitting any piece
+
+            r += dr
+            c += dc
+
+    return moves
