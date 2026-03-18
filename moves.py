@@ -50,3 +50,35 @@ def get_pawn_moves(board, row, col):
             moves.append((row, col, row + 1, col + 1))
 
     return moves
+
+
+def get_knight_moves(board, row, col):
+    moves = []
+    piece = board.board[row][col]
+
+    # All possible knight moves
+    directions = [
+        (-2, -1),
+        (-2, 1),
+        (-1, -2),
+        (-1, 2),
+        (1, -2),
+        (1, 2),
+        (2, -1),
+        (2, 1),
+    ]
+
+    for dr, dc in directions:
+        r, c = row + dr, col + dc
+        if 0 <= r <= 7 and 0 <= c <= 7:
+            target = board.board[r][c]
+            if piece.isupper():
+                # White knight: can move to empty or black piece
+                if target == "." or target.islower():
+                    moves.append((row, col, r, c))
+            else:
+                # Black knight: can move to empty or white piece
+                if target == "." or target.isupper():
+                    moves.append((row, col, r, c))
+
+    return moves
